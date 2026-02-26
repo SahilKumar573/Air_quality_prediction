@@ -12,6 +12,46 @@ st.set_page_config(
     layout="centered"
 )
 
+# ==============================
+# CUSTOM STYLING (SAFE)
+# ==============================
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #1f4037, #99f2c8);
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+        color: white;
+    }
+
+    .stButton>button {
+        background-color: #ff4b4b;
+        color: white;
+        font-size: 18px;
+        border-radius: 10px;
+        height: 3em;
+        width: 100%;
+    }
+
+    .stButton>button:hover {
+        background-color: #ff0000;
+        color: white;
+    }
+
+    .stNumberInput input {
+        background-color: white;
+        color: black;
+        border-radius: 8px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("🌫 Air Quality Prediction System")
 st.markdown("### Predict PM2.5 using Environmental Factors")
 
@@ -50,8 +90,6 @@ if st.button("🔮 Predict Pollution Level"):
 
     try:
         input_df = pd.DataFrame([input_data])
-
-        # Ensure correct column order
         input_df = input_df[feature_names]
 
         prediction = model.predict(input_df)[0]
@@ -61,3 +99,6 @@ if st.button("🔮 Predict Pollution Level"):
 
     except Exception as e:
         st.error(f"❌ Error: {e}")
+
+st.markdown("---")
+st.caption("AI/ML Air Quality Prediction Project")
